@@ -47,13 +47,13 @@ std::vector<std::string> GetFilenamesInDir(const std::string& dirname,
 {
 	DIR *dir;
 	struct dirent *ent;
-	cout << dirname.c_str() << endl;
+	// cout << dirname.c_str() << endl;
 	vector<string> files;
 	if ((dir = opendir (dirname.c_str())) != NULL) 
 	{
   		while ((ent = readdir (dir)) != NULL) 
   		{
-    		cout << ent->d_name << endl;
+    		// cout << ent->d_name << endl;
          string name = ent->d_name;
          if (filter.size() > 0 && name.find(filter) != std::string::npos)
          {
