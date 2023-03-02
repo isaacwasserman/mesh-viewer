@@ -30,7 +30,8 @@ public:
       }
       if(left_mousedown && !shiftdown){
          azimuth = azimuth + dx * 0.01f;
-         elevation = elevation + dy * 0.01f;
+         float maxElevation = 3.14159f / 2.0f - 0.01f;
+         elevation = std::min(maxElevation, std::max(-1.0f * maxElevation, elevation + dy * 0.01f));
       }
    }
 
@@ -95,6 +96,9 @@ public:
    }
 
    void draw() {
+      string shader = "normals";
+      renderer.loadShader(shader, "../shaders/" + shader + ".vs", "../shaders/" + shader + ".fs");
+      renderer.beginShader(shader);
       float aspect = ((float)width()) / height();
       renderer.perspective(glm::radians(fovDegrees), aspect, 0.1f, 50.0f);
 
@@ -115,6 +119,7 @@ public:
       up = camY;
 
       renderer.lookAt(eyePos, lookPos, up);
+      renderer.endShader();
    }
 
 protected:

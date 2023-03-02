@@ -9,7 +9,10 @@ uniform mat4 ModelViewMatrix;
 uniform mat4 MVP;
 uniform bool HasUV;
 
+out vec3 Normal;
+
 void main()
 {
    gl_Position = MVP * vec4(vPos, 1.0);
+   Normal = normalize(NormalMatrix * vNormal);
 }
