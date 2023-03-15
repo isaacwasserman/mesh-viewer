@@ -70,15 +70,16 @@ public:
    }
 
    void keyUp(int key, int mods) {
-      // n
-      if(key == 78){
+      if(key == GLFW_KEY_N){
          meshIndex = (meshIndex + 1) % meshPaths.size();
          reloadMesh();
       }
-      // p
-      if(key == 80){
+      if(key == GLFW_KEY_P){
          meshIndex = (meshIndex - 1) % meshPaths.size();
          reloadMesh();
+      }
+      if(key == GLFW_KEY_S){
+         shaderIndex = (shaderIndex + 1) % shaderNames.size();
       }
       if(key == GLFW_KEY_LEFT_SHIFT || key == GLFW_KEY_RIGHT_SHIFT){
          shiftdown = false;
@@ -96,9 +97,13 @@ public:
    }
 
    void draw() {
-      string shader = "normals";
+      string shader = shaderNames[shaderIndex];
       renderer.loadShader(shader, "../shaders/" + shader + ".vs", "../shaders/" + shader + ".fs");
       renderer.beginShader(shader);
+      renderer.setUniform("lightPosition", vec3(20, 20, 20));
+      renderer.setUniform("reflectivity", vec3(1, 1, 1));
+      renderer.setUniform("lightSourceIntensity", vec3(1.0, 0.5, 0.7));
+      
       float aspect = ((float)width()) / height();
       renderer.perspective(glm::radians(fovDegrees), aspect, 0.1f, 50.0f);
 
@@ -124,8 +129,10 @@ public:
 
 protected:
    vector<string> meshPaths = GetFilenamesInDir("../models", "ply");
+   vector<string> shaderNames = {"unlit", "normals", "phong-vertex", "phong-pixel"};
    float fovDegrees = 60.0f;
    int meshIndex = 0;
+   int shaderIndex = 0;
    PLYMesh mesh;
    vec3 meshCenter = vec3(0,0,0);
    float meshScale = 1.0f;
