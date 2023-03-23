@@ -2,7 +2,7 @@
 
 Implements a simple PLY viewer
 
-![](readme_assets/pearl.png)
+![](readme_assets/pearl.gif)
 
 ## How to build
 
@@ -46,7 +46,7 @@ mesh-viewer/build $ ../bin/mesh-viewer
 
 - Models can be swapped using the N key to go to the next model or the P key to go to the previous model.
 
-<video src="readme_assets/model_swap.mov"></video>
+![](readme_assets/model_swap.gif)
 
 - Shaders can be swapped using the S key. The shaders are as follows:
     - Pearl (Phong pixel shader with pearlescent reflections with dynamic light position)
@@ -56,16 +56,16 @@ mesh-viewer/build $ ../bin/mesh-viewer
     - Phong Vertex
     - Phong Pixel
 
-<video src="readme_assets/shader_swap.mov"></video>
+![](readme_assets/shader_swap.gif)
 
 ## Unique features 
 
 ### Pearl Shader
-The pearl shader uses the Phong pixel shader as a base and adds a component to the diffuse lighting which adds color based on the `r` vector to simulate pearlescent materials.
+The pearl shader uses the Phong pixel shader as a base and adds a component to the diffuse lighting which adds color based on the `r` vector to simulate pearlescent materials. The light source is also animated to show off these reflection effects.
 
-<video src="readme_assets/pearl.mov"></video>
+![](readme_assets/pearl.gif)
 
 ### Breathe
 The breathe shader uses the Phong pixel shader as a base and animates the `gl_position` vector in the vertex shader to move each vertex in the direction of its normal. This makes the mesh appear to "breathe".
 
-<video src="readme_assets/breathe.mov"></video>
+![](readme_assets/breathe.gif)
