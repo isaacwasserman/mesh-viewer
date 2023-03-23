@@ -100,9 +100,11 @@ public:
       string shader = shaderNames[shaderIndex];
       renderer.loadShader(shader, "../shaders/" + shader + ".vs", "../shaders/" + shader + ".fs");
       renderer.beginShader(shader);
-      renderer.setUniform("lightPosition", vec3(20, 20, 20));
+      renderer.setUniform("lightPosition", vec4(255, 255, 255, 1));
       renderer.setUniform("reflectivity", vec3(1, 1, 1));
       renderer.setUniform("lightSourceIntensity", vec3(1.0, 0.5, 0.7));
+      renderer.setUniform("time", (float) glfwGetTime());
+      renderer.setUniform("meshScale", meshScale);
       
       float aspect = ((float)width()) / height();
       renderer.perspective(glm::radians(fovDegrees), aspect, 0.1f, 50.0f);
@@ -129,7 +131,7 @@ public:
 
 protected:
    vector<string> meshPaths = GetFilenamesInDir("../models", "ply");
-   vector<string> shaderNames = {"unlit", "normals", "phong-vertex", "phong-pixel"};
+   vector<string> shaderNames = {"pearl", "breathe", "unlit", "normals", "phong-vertex", "phong-pixel"};
    float fovDegrees = 60.0f;
    int meshIndex = 0;
    int shaderIndex = 0;
